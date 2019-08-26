@@ -8,24 +8,15 @@ import java.io.StringWriter;
  *
  * @author qiang.zhang
  */
-public final class Throwables {
+public enum Throwables {
+  ;
+
   public static String print(Throwable e) {
     // --- expandable content
     StringWriter sw = new StringWriter();
     PrintWriter pw = new PrintWriter(sw);
     e.printStackTrace(pw);
     return sw.toString();
-  }
-
-  public static String printStackTrace() {
-    StringBuilder builder = new StringBuilder();
-    for (StackTraceElement element : Thread.currentThread().getStackTrace()) {
-      if (builder.length() > 0) {
-        builder.append("\r\n");
-      }
-      builder.append(element.toString());
-    }
-    return builder.toString();
   }
 
   public static String parse(Throwable e) {

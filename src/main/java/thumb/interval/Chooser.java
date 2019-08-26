@@ -7,18 +7,10 @@ import javafx.stage.FileChooser;
 import javax.annotation.Nullable;
 
 /**
- * 选择弹窗视图模型。
- *
  * @author qiang.zhang
  */
-public final class ChooserViewModel {
-  private ChooserViewModel() {
-    throw new AssertionError("No instance");
-  }
-
-  public static Optional<File> directory(String title) {
-    return directory(title, null);
-  }
+public enum Chooser {
+  ;
 
   public static Optional<File> directory(String title, @Nullable File workDir) {
     DirectoryChooser chooser = new DirectoryChooser();
@@ -28,14 +20,6 @@ public final class ChooserViewModel {
     }
     return Optional.ofNullable(chooser.showDialog(null))
         .filter(file -> file.exists() && file.isDirectory());
-  }
-
-  public static Optional<File> file(String title) {
-    return file(title, null);
-  }
-
-  public static Optional<File> file(String title, @Nullable File workDir) {
-    return file(title, workDir, null);
   }
 
   public static Optional<File> file(String title, @Nullable File workDir,

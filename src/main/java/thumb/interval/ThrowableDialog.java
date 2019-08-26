@@ -8,15 +8,15 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 /**
- * 异常对话框视图模型。
- *
  * @author qiang.zhang
  */
-public final class ThrowableDialogViewModel {
+public enum ThrowableDialog {
+  ;
+
   private static final URL FXML =
-      ThrowableDialogViewModel.class.getResource("/thumb/throwable-dialog.fxml");
+      ThrowableDialog.class.getResource("/thumb/throwable-dialog.fxml");
   private static final URL CSS =
-      ThrowableDialogViewModel.class.getResource("/thumb/thumb.css");
+      ThrowableDialog.class.getResource("/thumb/thumb.css");
 
   public static void show(Throwable throwable) {
     try {
@@ -26,14 +26,14 @@ public final class ThrowableDialogViewModel {
       Scene scene = new Scene(loader.load());
       scene.getStylesheets().add(CSS.toExternalForm());
       stage.setScene(scene);
-      ThrowableDialogViewModel viewModel = loader.getController();
+      ThrowableDialog viewModel = loader.getController();
       viewModel.errorDialogTitle.setText(Throwables.parse(throwable));
       viewModel.errorDialogContent.setText(throwable.getMessage());
       viewModel.debugInfo = Throwables.print(throwable);
       viewModel.stage = stage;
       stage.showAndWait();
     } catch (Exception e) {
-      AlertViewModel.showError(e);
+      Dialog.showError(e);
     }
   }
 
@@ -44,7 +44,7 @@ public final class ThrowableDialogViewModel {
   private String debugInfo;
 
   @FXML void onShowDetailsClicked() {
-    TextDialogViewModel.show(debugInfo);
+    TextDialog.show(debugInfo);
   }
 
   @FXML void onCloseClicked() {

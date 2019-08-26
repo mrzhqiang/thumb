@@ -10,15 +10,13 @@ import javafx.scene.input.ClipboardContent;
 import javafx.stage.Stage;
 
 /**
- * 文本对话框视图模型。
- *
  * @author qiang.zhang
  */
-public final class TextDialogViewModel {
-  private static final URL FXML =
-      TextDialogViewModel.class.getResource("/thumb/text-dialog.fxml");
-  private static final URL CSS =
-      TextDialogViewModel.class.getResource("/thumb/thumb.css");
+public enum TextDialog {
+  ;
+
+  private static final URL FXML = TextDialog.class.getResource("/thumb/text-dialog.fxml");
+  private static final URL CSS = TextDialog.class.getResource("/thumb/thumb.css");
 
   public static void show(String text) {
     try {
@@ -28,12 +26,12 @@ public final class TextDialogViewModel {
       Scene scene = new Scene(loader.load());
       scene.getStylesheets().add(CSS.toExternalForm());
       stage.setScene(scene);
-      TextDialogViewModel viewModel = loader.getController();
+      TextDialog viewModel = loader.getController();
       viewModel.stage = stage;
       viewModel.contentTextArea.setText(text);
       stage.showAndWait();
     } catch (Exception e) {
-      AlertViewModel.showError(e);
+      Dialog.showError(e);
     }
   }
 
